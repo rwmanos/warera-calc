@@ -417,10 +417,15 @@
 </div>
 
 <style>
+  :global(body) {
+    zoom: 0.75; /* Or 80% */
+  }
+
   .container {
     max-width: 1000px;
     margin: 2rem auto;
     font-family: sans-serif;
+    text-align: left;
   }
 
   .bar_row {
