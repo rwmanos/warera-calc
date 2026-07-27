@@ -99,10 +99,10 @@
   let total_miss = $derived((total_miss_perc * total_attack) / 2);
   let total_ontarget_perc = $derived(100 - total_miss_perc);
   let total_ontarget_normal = $derived(
-    total_precision * ((100 - total_crit_chance) / 100) * total_attack,
+    total_ontarget_perc * ((100 - total_crit_chance) / 100) * total_attack,
   );
   let total_ontarget_crit = $derived(
-    ((total_precision * total_crit_chance) / 100) *
+    ((total_ontarget_perc * total_crit_chance) / 100) *
       total_attack *
       (total_crit_damage / 100),
   );
@@ -361,7 +361,7 @@
   {/each}
   <h1>Status</h1>
   <p>
-    ⚔️ {total_attack_with_battle_bonus.toFixed(1)} 💥 {total_precision}% 💫 {total_crit_chance}%
+    ⚔️ {total_attack_with_battle_bonus.toFixed(1)} 💥 {total_ontarget_perc}% 💫 {total_crit_chance}%
     🎯 {total_crit_damage}%
   </p>
   ⚔️ {total_attack.toFixed(1)} with battle bonus ({battleBonus}%)
@@ -379,13 +379,13 @@
     </div>
     <div class="calc-row">
       <span class="calc-label">on-target</span>
-      <span class="calc-value">{total_precision}%</span>
+      <span class="calc-value">{total_ontarget_perc}%</span>
       <span class="calc-label">normal ({100 - total_crit_chance}%)</span>
       <span class="calc-value"
-        >{(total_precision * (100 - total_crit_chance)) / 100}%</span
+        >{(total_ontarget_perc * (100 - total_crit_chance)) / 100}%</span
       >
       <span class="calc-equals"
-        >{(total_precision * (100 - total_crit_chance)) / 100} * {total_attack.toFixed(
+        >{(total_ontarget_perc * (100 - total_crit_chance)) / 100} * {total_attack.toFixed(
           0,
         )}</span
       >
@@ -396,10 +396,10 @@
       <span class="calc-value"></span>
       <span class="calc-label">crit ({total_crit_chance}%)</span>
       <span class="calc-value"
-        >{(total_precision * total_crit_chance) / 100}%</span
+        >{(total_ontarget_perc * total_crit_chance) / 100}%</span
       >
       <span class="calc-equals"
-        >{(total_precision * total_crit_chance) / 100} * {total_attack.toFixed(
+        >{(total_ontarget_perc * total_crit_chance) / 100} * {total_attack.toFixed(
           0,
         )} * {total_crit_damage / 100}</span
       >
@@ -418,7 +418,7 @@
 
 <style>
   .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 2rem auto;
     font-family: sans-serif;
   }
@@ -566,7 +566,7 @@
 
   .calc-row {
     display: grid;
-    grid-template-columns: 80px 90px 100px 50px 260px 85px;
+    grid-template-columns: 100px 90px 140px 50px 280px 85px;
     align-items: center;
     gap: 0.5rem;
     font-family: monospace;
